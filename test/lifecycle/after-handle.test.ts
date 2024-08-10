@@ -10,7 +10,7 @@ describe('After Handle', () => {
 		const res = await app.handle(req('/')).then((x) => x.text())
 
 		expect(res).toBe('A')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('work local', async () => {
 		const app = new Elysia().get('/', () => 'NOOP', {
@@ -22,7 +22,7 @@ describe('After Handle', () => {
 		const res = await app.handle(req('/')).then((x) => x.text())
 
 		expect(res).toBe('A')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('inherits from plugin', async () => {
 		const transformType = new Elysia().onAfterHandle(
@@ -39,7 +39,7 @@ describe('After Handle', () => {
 		const res = await app.handle(req('/id/1'))
 
 		expect(await res.text()).toBe('number')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('not inherits plugin on local', async () => {
 		const transformType = new Elysia().onAfterHandle(({ response }) => {
@@ -53,7 +53,7 @@ describe('After Handle', () => {
 		const res = await app.handle(req('/id/1'))
 
 		expect(await res.text()).toBe('string')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('register using on', async () => {
 		const app = new Elysia()
@@ -65,7 +65,7 @@ describe('After Handle', () => {
 		const res = await app.handle(req('/id/1'))
 
 		expect(await res.text()).toBe('number')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('after handle in order', async () => {
 		let order = <string[]>[]
@@ -82,7 +82,7 @@ describe('After Handle', () => {
 		await app.handle(req('/'))
 
 		expect(order).toEqual(['A', 'B'])
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('accept response', async () => {
 		const app = new Elysia().get('/', () => 'NOOP', {
@@ -94,7 +94,7 @@ describe('After Handle', () => {
 		const res = await app.handle(req('/')).then((x) => x.text())
 
 		expect(res).toBe('NOOP')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('as global', async () => {
 		const called = <string[]>[]
@@ -113,7 +113,7 @@ describe('After Handle', () => {
 		])
 
 		expect(called).toEqual(['/inner', '/outer'])
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('as local', async () => {
 		const called = <string[]>[]
@@ -132,7 +132,7 @@ describe('After Handle', () => {
 		])
 
 		expect(called).toEqual(['/inner'])
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('support array', async () => {
 		let total = 0
@@ -151,5 +151,5 @@ describe('After Handle', () => {
 		const res = await app.handle(req('/'))
 
 		expect(total).toEqual(2)
-	})
+	}, 5000) // Add timeout of 5 seconds
 })

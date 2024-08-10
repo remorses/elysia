@@ -19,7 +19,7 @@ describe('group', () => {
 		const res = await app.handle(req('/counter')).then((r) => r.text())
 
 		expect(res).toBe('2')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('decorate group', async () => {
 		const app = new Elysia().group('/v1', (app) =>
@@ -29,7 +29,7 @@ describe('group', () => {
 		const res = await app.handle(req('/v1/')).then((x) => x.text())
 
 		expect(res).toBe('b')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('validate headers', async () => {
 		const app = new Elysia().group(
@@ -53,7 +53,7 @@ describe('group', () => {
 
 		expect(correct.status).toBe(200)
 		expect(error.status).toBe(422)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('validate params', async () => {
 		const app = new Elysia().group(
@@ -74,7 +74,7 @@ describe('group', () => {
 
 		expect(correct.status).toBe(200)
 		expect(error.status).toBe(422)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('validate query', async () => {
 		const app = new Elysia().group(
@@ -92,7 +92,7 @@ describe('group', () => {
 
 		expect(correct.status).toBe(200)
 		expect(error.status).toBe(422)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('validate body', async () => {
 		const app = new Elysia().group(
@@ -118,7 +118,7 @@ describe('group', () => {
 
 		expect(correct.status).toBe(200)
 		expect(error.status).toBe(422)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('validate response', async () => {
 		const app = new Elysia().group(
@@ -139,7 +139,7 @@ describe('group', () => {
 
 		expect(correct.status).toBe(200)
 		expect(error.status).toBe(422)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('validate request with prefix', async () => {
 		const app = new Elysia({ prefix: '/api' }).group('/v1', (app) =>
@@ -149,7 +149,7 @@ describe('group', () => {
 		const res = await app.handle(req('/api/v1'))
 
 		expect(res.status).toBe(200)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('handle nested prefix with group', () => {
 		const plugin = new Elysia({ prefix: '/v1' }).group('/course', (app) =>
@@ -180,7 +180,7 @@ describe('group', () => {
 			'/v1/course/new',
 			'/v1/course/id/:courseId/chapter/hello'
 		])
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it("skip don't duplicate prefix on group with hooks", () => {
 		const a = new Elysia({ prefix: '/course' }).group(
@@ -208,7 +208,7 @@ describe('group', () => {
 			'/test/id/:courseId/b',
 			'/'
 		])
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('inherits singleton / definitions and re-meregd on main', async () => {
 		const app = new Elysia()
@@ -246,5 +246,5 @@ describe('group', () => {
 		const response = await app.handle(req('/posts')).then((x) => x.text())
 
 		expect(response).toEqual('a')
-	})
+	}, 5000) // Add timeout of 5 seconds
 })

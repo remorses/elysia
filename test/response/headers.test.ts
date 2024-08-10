@@ -13,7 +13,7 @@ describe('Response Headers', () => {
 		const res = await app.handle(req('/'))
 
 		expect(res.headers.get('x-powered-by')).toBe('Elysia')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('add headers from hook', async () => {
 		const app = new Elysia()
@@ -24,7 +24,7 @@ describe('Response Headers', () => {
 		const res = await app.handle(req('/'))
 
 		expect(res.headers.get('x-powered-by')).toBe('Elysia')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('add headers from plugin', async () => {
 		const plugin = (app: Elysia) =>
@@ -36,7 +36,7 @@ describe('Response Headers', () => {
 		const res = await app.handle(req('/'))
 
 		expect(res.headers.get('x-powered-by')).toBe('Elysia')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('add headers to Response', async () => {
 		const app = new Elysia()
@@ -47,7 +47,7 @@ describe('Response Headers', () => {
 		const res = await app.handle(req('/'))
 
 		expect(res.headers.get('x-powered-by')).toBe('Elysia')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('add status to Response', async () => {
 		const app = new Elysia().get('/', ({ set }) => {
@@ -60,7 +60,7 @@ describe('Response Headers', () => {
 
 		expect(await res.text()).toBe('Hi')
 		expect(res.status).toBe(401)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('create static header', async () => {
 		const app = new Elysia()
@@ -72,7 +72,7 @@ describe('Response Headers', () => {
 		const headers = await app.handle(req('/')).then((x) => x.headers)
 
 		expect(headers.get('x-powered-by')).toBe('Elysia')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('accept header from plugin', async () => {
 		const plugin = new Elysia().headers({
@@ -84,7 +84,7 @@ describe('Response Headers', () => {
 		const headers = await app.handle(req('/')).then((x) => x.headers)
 
 		expect(headers.get('x-powered-by')).toBe('Elysia')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('scoped headers', async () => {
 		const plugin = new Elysia({ scoped: true }).headers({
@@ -96,5 +96,5 @@ describe('Response Headers', () => {
 		const headers = await app.handle(req('/')).then((x) => x.headers)
 
 		expect(headers.get('x-powered-by')).toBeNull()
-	})
+	}, 5000) // Add timeout of 5 seconds
 })

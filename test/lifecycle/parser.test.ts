@@ -26,7 +26,7 @@ describe('Parser', () => {
 		)
 
 		expect(await res.text()).toBe('A')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('register using on', async () => {
 		const app = new Elysia()
@@ -50,7 +50,7 @@ describe('Parser', () => {
 		)
 
 		expect(await res.text()).toBe(':D')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('overwrite default parser', async () => {
 		const app = new Elysia()
@@ -74,7 +74,7 @@ describe('Parser', () => {
 		)
 
 		expect(await res.text()).toBe('Overwrited')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('parse x-www-form-urlencoded', async () => {
 		const app = new Elysia().post('/', ({ body }) => body)
@@ -95,7 +95,7 @@ describe('Parser', () => {
 		)
 
 		expect(await res.json()).toEqual(body)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('parse with extra content-type attribute', async () => {
 		const app = new Elysia().post('/', ({ body }) => body)
@@ -116,7 +116,7 @@ describe('Parser', () => {
 		)
 
 		expect(await res.json()).toEqual(body)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('inline parse', async () => {
 		const app = new Elysia().post('/', ({ body }) => body, {
@@ -138,7 +138,7 @@ describe('Parser', () => {
 			.then((x) => x.text())
 
 		expect(res).toBe('hi')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('map parser in order', async () => {
 		let order = <string[]>[]
@@ -155,7 +155,7 @@ describe('Parser', () => {
 		const res = await app.handle(post('/', {}))
 
 		expect(order).toEqual(['A', 'B'])
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('inherits plugin', async () => {
 		const plugin = new Elysia().onParse({ as: 'global' }, () => 'Kozeki Ui')
@@ -164,7 +164,7 @@ describe('Parser', () => {
 
 		const res = await app.handle(post('/', {})).then((t) => t.text())
 		expect(res).toBe('Kozeki Ui')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('not inherits plugin on local', async () => {
 		const plugin = new Elysia().onParse(() => 'Kozeki Ui')
@@ -176,7 +176,7 @@ describe('Parser', () => {
 			.then((t) => t.json())
 
 		expect(res).toEqual({ name: 'Kozeki Ui' })
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('as global', async () => {
 		const called = <string[]>[]
@@ -195,7 +195,7 @@ describe('Parser', () => {
 		])
 
 		expect(called).toEqual(['/inner', '/outer'])
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('as local', async () => {
 		const called = <string[]>[]
@@ -214,7 +214,7 @@ describe('Parser', () => {
 		])
 
 		expect(called).toEqual(['/inner'])
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('support array', async () => {
 		let total = 0
@@ -233,7 +233,7 @@ describe('Parser', () => {
 		const res = await app.handle(post('/', {}))
 
 		expect(total).toEqual(2)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('handle type with validator with custom parse', async () => {
 		const app = new Elysia().post('/json', ({ body: { name } }) => name, {
@@ -267,5 +267,5 @@ describe('Parser', () => {
 		expect(correct).toBe('Aru')
 		expect(incorrect).toBe(422)
 		expect(custom).toBe('Mutsuki')
-	})
+	}, 5000) // Add timeout of 5 seconds
 })

@@ -11,7 +11,7 @@ describe('Dynamic Mode', () => {
 
 		const res = await app.handle(req('/')).then((x) => x.text())
 		expect(res).toBe('Hi')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('handle body', async () => {
 		const app = new Elysia({
@@ -34,7 +34,7 @@ describe('Dynamic Mode', () => {
 
 		expect(res.name).toBe(body.name)
 		expect(invalid).toBe(422)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('handle dynamic all method', async () => {
 		const app = new Elysia({
@@ -43,7 +43,7 @@ describe('Dynamic Mode', () => {
 
 		const res = await app.handle(req('/all/world')).then((x) => x.text())
 		expect(res).toBe('ALL')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('inherits plugin', async () => {
 		const plugin = new Elysia().decorate('hi', () => 'hi')
@@ -56,7 +56,7 @@ describe('Dynamic Mode', () => {
 
 		const res = await app.handle(req('/')).then((r) => r.text())
 		expect(res).toBe('hi')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('use custom error', async () => {
 		const res = await new Elysia({
@@ -73,7 +73,7 @@ describe('Dynamic Mode', () => {
 
 		expect(await res.text()).toBe("I'm a teapot")
 		expect(res.status).toBe(418)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('inject headers to error', async () => {
 		const app = new Elysia({
@@ -90,7 +90,7 @@ describe('Dynamic Mode', () => {
 
 		expect(res.headers.get('Access-Control-Allow-Origin')).toBe('*')
 		expect(res.status).toBe(404)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('transform any to error', async () => {
 		const app = new Elysia({
@@ -109,7 +109,7 @@ describe('Dynamic Mode', () => {
 
 		expect(await res.text()).toBe('aw man')
 		expect(res.status).toBe(418)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('derive', async () => {
 		const app = new Elysia({
@@ -126,7 +126,7 @@ describe('Dynamic Mode', () => {
 
 		expect(await res.text()).toBe('A')
 		expect(res.status).toBe(200)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('validate', async () => {
 		const app = new Elysia({
@@ -153,7 +153,7 @@ describe('Dynamic Mode', () => {
 			)
 			.then((x) => x.text())
 		expect(res).toBe('me')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('handle non query fallback', async () => {
 		const app = new Elysia({ aot: false }).get('/', () => 'hi', {
@@ -169,7 +169,7 @@ describe('Dynamic Mode', () => {
 		expect(res1.status).toBe(200)
 		expect(res2.status).toBe(200)
 		expect(res3.status).toBe(200)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	describe('handle local parse event', async () => {
 		const app = new Elysia({ aot: false }).post('/', (ctx) => ctx.body, {
@@ -188,5 +188,5 @@ describe('Dynamic Mode', () => {
 		)
 
 		expect(await res.text()).toBe('text/plain')
-	})
+	}, 5000) // Add timeout of 5 seconds
 })
