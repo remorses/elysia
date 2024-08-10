@@ -10,7 +10,7 @@ describe('Static Content', () => {
 		const response = await app.handle(req('/')).then((x) => x.text())
 
 		expect(response).toBe('Static Content')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('handle onRequest', async () => {
 		const app = new Elysia()
@@ -20,7 +20,7 @@ describe('Static Content', () => {
 		const response = await app.handle(req('/')).then((x) => x.text())
 
 		expect(response).toBe('request')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('inline life-cycle', async () => {
 		const app = new Elysia().get('/', 'Static Content', {
@@ -32,7 +32,7 @@ describe('Static Content', () => {
 		const response = await app.handle(req('/')).then((x) => x.text())
 
 		expect(response).toBe('beforeHandle')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('mutate context', async () => {
 		const app = new Elysia().get('/', 'Static Content', {
@@ -44,7 +44,7 @@ describe('Static Content', () => {
 		const headers = await app.handle(req('/')).then((x) => x.headers)
 
 		expect(headers.get('X-Powered-By')).toBe('Elysia')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('set default header', async () => {
 		const app = new Elysia()
@@ -56,7 +56,7 @@ describe('Static Content', () => {
 		const headers = await app.handle(req('/')).then((x) => x.headers)
 
 		expect(headers.get('X-Powered-By')).toBe('Elysia')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('handle errror after routing', async () => {
 		const app = new Elysia().get('/', 'Static Content', {
@@ -71,7 +71,7 @@ describe('Static Content', () => {
 		const response = await app.handle(req('/')).then((x) => x.text())
 
 		expect(response).toBe('handled')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('handle errror after routing', async () => {
 		const app = new Elysia()
@@ -84,7 +84,7 @@ describe('Static Content', () => {
 		const response = await app.handle(req('/')).then((x) => x.text())
 
 		expect(response).toBe('handled')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('clone content', async () => {
 		const app = new Elysia().get('/', 'Static Content', {
@@ -98,5 +98,5 @@ describe('Static Content', () => {
 		const headers = await app.handle(req('/')).then((x) => x.headers)
 
 		expect(headers.get('X-Powered-By')).toBe('Elysia')
-	})
+	}, 5000) // Add timeout of 5 seconds
 })

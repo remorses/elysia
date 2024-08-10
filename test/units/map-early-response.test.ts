@@ -35,7 +35,7 @@ describe('Map Early Response', () => {
 		expect(response).toBeInstanceOf(Response)
 		expect(await response?.text()).toBe('Shiroko')
 		expect(response?.status).toBe(200)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('map number', async () => {
 		const response = mapEarlyResponse(1, defaultContext)
@@ -43,7 +43,7 @@ describe('Map Early Response', () => {
 		expect(response).toBeInstanceOf(Response)
 		expect(await response?.text()).toBe('1')
 		expect(response?.status).toBe(200)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('map boolean', async () => {
 		const response = mapEarlyResponse(true, defaultContext)
@@ -51,7 +51,7 @@ describe('Map Early Response', () => {
 		expect(response).toBeInstanceOf(Response)
 		expect(await response?.text()).toBe('true')
 		expect(response?.status).toBe(200)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('map object', async () => {
 		const body = {
@@ -63,7 +63,7 @@ describe('Map Early Response', () => {
 		expect(response).toBeInstanceOf(Response)
 		expect(await response?.json()).toEqual(body)
 		expect(response?.status).toBe(200)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('map function', async () => {
 		const response = mapEarlyResponse(() => 1, defaultContext)
@@ -71,7 +71,7 @@ describe('Map Early Response', () => {
 		expect(response).toBeInstanceOf(Response)
 		expect(await response?.text()).toBe('1')
 		expect(response?.status).toBe(200)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('map Blob', async () => {
 		const file = Bun.file('./test/images/aris-yuzu.jpg')
@@ -81,7 +81,7 @@ describe('Map Early Response', () => {
 		expect(response).toBeInstanceOf(Response)
 		expect(await response?.arrayBuffer()).toEqual(await file.arrayBuffer())
 		expect(response?.status).toBe(200)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('map Promise', async () => {
 		const body = {
@@ -96,7 +96,7 @@ describe('Map Early Response', () => {
 		expect(response).toBeInstanceOf(Response)
 		expect(await response?.json()).toEqual(body)
 		expect(response?.status).toBe(200)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('map Response', async () => {
 		const response = mapEarlyResponse(
@@ -107,7 +107,7 @@ describe('Map Early Response', () => {
 		expect(response).toBeInstanceOf(Response)
 		expect(await response?.text()).toEqual('Shiroko')
 		expect(response?.status).toBe(200)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('map custom class', async () => {
 		const response = mapEarlyResponse(new Student('Himari'), defaultContext)
@@ -117,7 +117,7 @@ describe('Map Early Response', () => {
 			name: 'Himari'
 		})
 		expect(response?.status).toBe(200)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('map primitive with custom context', async () => {
 		const response = mapEarlyResponse('Shiroko', context)
@@ -126,7 +126,7 @@ describe('Map Early Response', () => {
 		expect(await response?.text()).toBe('Shiroko')
 		expect(response?.headers.toJSON()).toEqual(context.headers)
 		expect(response?.status).toBe(418)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('map Function with custom context', async () => {
 		const response = await mapEarlyResponse(() => 1, context)
@@ -137,7 +137,7 @@ describe('Map Early Response', () => {
 			...context.headers
 		})
 		expect(response?.status).toBe(418)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('map Promise with custom context', async () => {
 		const body = {
@@ -156,7 +156,7 @@ describe('Map Early Response', () => {
 			'content-type': 'application/json;charset=utf-8'
 		})
 		expect(response?.status).toBe(418)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('map Error with custom context', async () => {
 		const response = mapEarlyResponse(new Error('Hello'), context)
@@ -168,7 +168,7 @@ describe('Map Early Response', () => {
 		})
 		expect(response?.headers.toJSON()).toEqual(context.headers)
 		expect(response?.status).toBe(418)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('map Response with custom context', async () => {
 		const response = mapEarlyResponse(new Response('Shiroko'), context)
@@ -177,7 +177,7 @@ describe('Map Early Response', () => {
 		expect(response).toBeInstanceOf(Response)
 		expect(await response?.text()).toEqual('Shiroko')
 		expect(response?.headers.toJSON()).toEqual(headers as any)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('map Response and merge Headers', async () => {
 		const response = mapEarlyResponse(
@@ -196,7 +196,7 @@ describe('Map Early Response', () => {
 			...headers,
 			name: 'Himari'
 		})
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('map named status', async () => {
 		const response = mapEarlyResponse('Shiroko', {
@@ -208,7 +208,7 @@ describe('Map Early Response', () => {
 		expect(response).toBeInstanceOf(Response)
 		expect(await response?.text()).toBe('Shiroko')
 		expect(response?.status).toBe(418)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('map redirect', async () => {
 		const response = mapEarlyResponse('Shiroko', {
@@ -228,19 +228,19 @@ describe('Map Early Response', () => {
 
 		expect(response).toBeInstanceOf(Response)
 		expect(response?.status).toBe(302)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('map undefined', async () => {
 		const response = mapEarlyResponse(undefined, defaultContext)
 
 		expect(response).toBeUndefined()
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('map null', async () => {
 		const response = mapEarlyResponse(null, defaultContext)
 
 		expect(response).toBeUndefined()
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('set cookie', async () => {
 		const response = mapEarlyResponse('Hina', {
@@ -258,7 +258,7 @@ describe('Map Early Response', () => {
 		expect(await response?.text()).toEqual('Hina')
 		expect(response?.headers.get('name')).toEqual('Sorasaki Hina')
 		expect(response?.headers.getAll('set-cookie')).toEqual(['name=hina'])
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('set multiple cookie', async () => {
 		const response = mapEarlyResponse('Hina', {
@@ -282,7 +282,7 @@ describe('Map Early Response', () => {
 			'name=hina',
 			'affiliation=gehenna'
 		])
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('map toResponse', async () => {
 		const response = mapEarlyResponse(new Passthrough(), defaultContext)
@@ -290,7 +290,7 @@ describe('Map Early Response', () => {
 		expect(response).toBeInstanceOf(Response)
 		expect(await response?.text()).toEqual('hi')
 		expect(response?.status).toBe(200)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('map video content-range', async () => {
 		const kyuukararin = Bun.file('test/kyuukurarin.mp4')
@@ -303,7 +303,7 @@ describe('Map Early Response', () => {
 			`bytes 0-${kyuukararin.size - 1}/${kyuukararin.size}`
 		)
 		expect(response?.status).toBe(200)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('skip content-range on not modified', async () => {
 		const kyuukararin = Bun.file('test/kyuukurarin.mp4')
@@ -317,7 +317,7 @@ describe('Map Early Response', () => {
 		expect(response?.headers.get('accept-ranges')).toBeNull()
 		expect(response?.headers.get('content-range')).toBeNull()
 		expect(response?.status).toBe(200)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('map formdata', async () => {
 		const response = mapEarlyResponse(
@@ -332,5 +332,5 @@ describe('Map Early Response', () => {
 		)
 		expect(response.status).toBe(200)
 		expect(await response.formData()).toBeInstanceOf(FormData)
-	})
+	}, 5000) // Add timeout of 5 seconds
 })

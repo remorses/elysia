@@ -42,7 +42,7 @@ describe('Stream', () => {
 
 		expect(expected).toHaveLength(0)
 		expect(response).toBe('abc')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('stop stream on canceled request', async () => {
 		const expected = ['a', 'b']
@@ -92,7 +92,7 @@ describe('Stream', () => {
 
 		expect(expected).toHaveLength(0)
 		expect(response).toBe('ab')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('mutate set before yield is called', async () => {
 		const expected = ['a', 'b', 'c']
@@ -110,7 +110,7 @@ describe('Stream', () => {
 		expect(response.get('access-control-allow-origin')).toBe(
 			'http://saltyaom.com'
 		)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('mutate set before yield is called', async () => {
 		const expected = ['a', 'b', 'c']
@@ -128,7 +128,7 @@ describe('Stream', () => {
 		expect(response.get('access-control-allow-origin')).toBe(
 			'http://saltyaom.com'
 		)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('async mutate set before yield is called', async () => {
 		const expected = ['a', 'b', 'c']
@@ -146,7 +146,7 @@ describe('Stream', () => {
 		expect(response.get('access-control-allow-origin')).toBe(
 			'http://saltyaom.com'
 		)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('return value if not yield', async () => {
 		const app = new Elysia()
@@ -166,7 +166,7 @@ describe('Stream', () => {
 		expect(await response[1].json()).toEqual({
 			hello: 'world'
 		})
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('return async value if not yield', async () => {
 		const app = new Elysia()
@@ -186,7 +186,7 @@ describe('Stream', () => {
 		expect(await response[1].json()).toEqual({
 			hello: 'world'
 		})
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('handle object and array', async () => {
 		const expected = [{ a: 'b' }, ['a'], ['a', 1, { a: 'b' }]]
@@ -223,5 +223,5 @@ describe('Stream', () => {
 
 				return promise
 			})
-	})
+	}, 5000) // Add timeout of 5 seconds
 })

@@ -27,7 +27,7 @@ describe('Scoped', () => {
 			inner: 1
 		})
 		expect(await app.handle(req('/')).then((x) => x.text())).toBe('2')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('encapsulate request event', async () => {
 		let count = 0
@@ -47,7 +47,7 @@ describe('Scoped', () => {
 		await app.handle(req('/scoped'))
 
 		expect(count).toBe(1)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('encapsulate afterhandle event', async () => {
 		let count = 0
@@ -67,7 +67,7 @@ describe('Scoped', () => {
 		await app.handle(req('/scoped'))
 
 		expect(count).toBe(1)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	// TODO: Possibly Elysia 1.1, no promise tee-hee (finger-crossed)
 	// it('multiple scoped events', async () => {
@@ -114,5 +114,5 @@ describe('Scoped', () => {
 
 		const res1 = await app.handle(req('/PluginNext/testPrivate'))
 		expect(res1.status).toBe(200)
-	})
+	}, 5000) // Add timeout of 5 seconds
 })

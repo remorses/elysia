@@ -13,7 +13,7 @@ describe('Edge Case', () => {
 		const res = await app.handle(req('/'))
 
 		expect(await res.text()).toBe('a')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	// https://github.com/oven-sh/bun/issues/1523
 	it("don't return HTTP 10", async () => {
@@ -25,7 +25,7 @@ describe('Edge Case', () => {
 
 		const res = await app.handle(req('/'))
 		expect(res.status).toBe(200)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('has no side-effect', async () => {
 		const app = new Elysia()
@@ -41,7 +41,7 @@ describe('Edge Case', () => {
 
 		expect(res1.headers.get('x-server')).toBe('Elysia')
 		expect(res2.headers.get('x-server')).toBe(null)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('return Promise', async () => {
 		const app = new Elysia().get(
@@ -51,14 +51,14 @@ describe('Edge Case', () => {
 
 		const res = await app.handle(req('/')).then((x) => x.text())
 		expect(res).toBe('h')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('handle dynamic all method', async () => {
 		const app = new Elysia().all('/all/*', () => 'ALL')
 
 		const res = await app.handle(req('/all/world')).then((x) => x.text())
 		expect(res).toBe('ALL')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	// ? since different runtime expected to have different implementation of new Response
 	// ? we can't handle all the case
@@ -108,7 +108,7 @@ describe('Edge Case', () => {
 
 		expect(await strict.handle(req('/a')).then((x) => x.status)).toBe(404)
 		expect(await strict.handle(req('/a/')).then((x) => x.status)).toBe(200)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('return cookie with file', async () => {
 		const kyuukararin = Bun.file('test/kyuukurarin.mp4')
@@ -130,7 +130,7 @@ describe('Edge Case', () => {
 
 		expect(response['set-cookie']).toHaveLength(1)
 		expect(response['content-type']).toBe('video/mp4')
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('preserve correct index order of routes if duplicated', () => {
 		const app = new Elysia()
@@ -145,7 +145,7 @@ describe('Edge Case', () => {
 		expect(app.routeTree.get('GET/0')).toEqual(0)
 		// @ts-expect-error
 		expect(app.routeTree.get('GET/4')).toEqual(4)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('preserve correct index order of routes if duplicated from plugin', () => {
 		const plugin = new Elysia()
@@ -163,7 +163,7 @@ describe('Edge Case', () => {
 		expect(app.routeTree.get('GET/0')).toEqual(0)
 		// @ts-expect-error
 		expect(app.routeTree.get('GET/4')).toEqual(4)
-	})
+	}, 5000) // Add timeout of 5 seconds
 
 	it('get getGlobalRoutes', () => {
 		const plugin = new Elysia().get('/', () => 'hello')
@@ -172,5 +172,5 @@ describe('Edge Case', () => {
 
 		// @ts-expect-error private property
 		expect(main.getGlobalRoutes().length).toBe(2)
-	})
+	}, 5000) // Add timeout of 5 seconds
 })
