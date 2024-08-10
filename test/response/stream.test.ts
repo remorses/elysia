@@ -94,6 +94,7 @@ describe('Stream', () => {
 		expect(response).toBe('ab')
 	}, 5000) // Add timeout of 5 seconds
 
+
 	it('mutate set before yield is called', async () => {
 		const expected = ['a', 'b', 'c']
 
